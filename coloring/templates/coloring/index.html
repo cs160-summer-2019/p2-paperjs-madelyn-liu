@@ -59,14 +59,89 @@
 			// you may also add code outside of the function (e.g., global variables)
 			function myGradientInteraction(){
 				var tool = new paper.Tool();
+        
+        var rectangle = new paper.Rectangle(new paper.Point(275, 300), new paper.Point(450, 400), 200, 100);
+        var path = new paper.Path.Rectangle(rectangle);
+        path.fillColor = 'red';
+        
+        
+        var originPoint = new paper.Point(0,0);
+        var destPoint = new paper.Point(0,0);
+        var history = cp.history;
+        var stop1 = history[history.length-1];
+        if (history.length > 1) {
+        var stop2 = history[history.length-2];
+            } else {
+              var stop2 = 'red';
+            }
+        console.log(history);
+        console.log(stop1);
+        console.log(stop2);
+        console.log('fuckkkk');
+        
+        console.log(originPoint);
+        console.log(destPoint);
 
 				tool.onMouseDown = function (event) {
+          originPoint.set(event.point);
+          console.log(originPoint);
+//         topLeft = new paper.Point(50,50);
+//         bottomRight = new paper.Point(150, 100);
+          
+//         path = new paper.Path.Rectangle( {
+//         fillColor: {
+//         gradient: {
+//             stops: ['yellow', 'red', 'blue']
+//         },
+//         origin: event.point,
+//         destination: event.point
+//     }
 
-				}
+// 				});
+//      
+        }
+         
 
 				tool.onMouseUp = function (event) {
+          destPoint.set(event.point);
+          console.log(destPoint);
+          
+//           topLeft = new paper.Point(275,300);
+//         bottomRight = new paper.Point(450, 400);
+          
+        path.fillColor = {
+        gradient: {
+//           stops: [stop1, stop2],
+             stops: [history[history.length-2], history[history.length-1]],
+//           console.log();
+        },  
+        origin: event.downPoint,
+        destination: event.point
+    }
+
+				;
+          console.log('fuckkkkk2');
+          console.log(history);
+//           console.log(path.gradient.stops);
 					
 				}
+//         var topLeft = new paper.Point(275,300);
+//         var bottomRight = new paper.Point(450, 400);
+//         rectangle = new paper.Rectangle(topLeft, bottomRight, 200, 100);
+//         path = new paper.Path.Rectangle(rectangle);
+//         console.log('fuckkkkk2'); 
+//         pathfillColor = {
+//         gradient: {
+//              stops: [stop1, stop2]
+// //           console.log();
+//         },  
+//         origin: event.downPoint,
+//         destination: destPoint
+//     }
+//         ;
+        
+        
+//         path2.fillColor = 'blue';
 			}
 
 			// your custom interaction goes here!
@@ -93,6 +168,7 @@
 					$swatch.click(function(){
 						// add color to the color palette history
 					  	cp.history.push($(this).css("background-color"));
+            console.log($(this).css("background-color"));
 					});
 					cp.$container.append($swatch);
 				}
